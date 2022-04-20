@@ -1,6 +1,7 @@
 # Deep Learning Project Template
 
-My opinionated way of starting a deep learning project. The chosen stack:
+An opinionated cookiecutter template to quickly bootstrap a deep learning project.
+This project is based on the [cookiecutter-data-science](https://github.com/drivendata/cookiecutter-data-science) template, with the following stack:
 
 - PyTorch as the DL framework
 - PyTorch Lightning to alleviate many PyTorch boilerplates
@@ -22,7 +23,7 @@ conda config --add channels conda-forge
 conda install cookiecutter
 ```
 
-## Start a new project
+## Starting a new project
 
 ```bash
 cookiecutter https://github.com/bagasabisena/dl-project-template
