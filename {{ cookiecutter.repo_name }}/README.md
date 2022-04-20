@@ -1,10 +1,8 @@
-{{cookiecutter.project_name}}
-==============================
+# {{cookiecutter.project_name}}
 
 {{cookiecutter.description}}
 
-Project Organization
-------------
+## Project Organization
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
@@ -15,16 +13,11 @@ Project Organization
     │   ├── processed      <- The final, canonical data sets for modeling.
     │   └── raw            <- The original, immutable data dump.
     │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
     ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
     │                         the creator's initials, and a short `-` delimited description, e.g.
     │                         `1.0-jqp-initial-data-exploration`.
     │
     ├── outputs            <- Model checkpoints, tensorboard logs, etc., the output of the model process
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
     │
     ├── env.yaml           <- The requirements file for reproducing the analysis environment.
     │                         We use conda for managing the environment
@@ -52,4 +45,17 @@ Project Organization
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
---------
+## Start training jobs
+
+This project comes with several built-in Hydra experiments, tailored for debugging purpose
+
+```bash
+# this run a training job with the fast_dev_run set to True
+python src/models/train_model.py +experiment=debug
+
+# this run training job on a single training sample, to check if it can overfit
+python src/models/train_model.py +experiment=overfit_single
+
+# this run a training job on a multiple training sample, to check if it can overfit
+python src/models/train_model.py +experiment=overfit_single
+```
