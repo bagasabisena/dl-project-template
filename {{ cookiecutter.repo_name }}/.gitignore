@@ -77,7 +77,7 @@ target/
 
 # exclude data and outputs from source control by default
 /data/
-# /outputs/
+/outputs/
 
 # Mac OS-specific storage files
 .DS_Store
