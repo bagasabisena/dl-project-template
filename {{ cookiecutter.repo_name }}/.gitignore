@@ -67,7 +67,7 @@ target/
 .idea
 
 # VS Code
-# .vscode/
+.vscode/
 
 # Spyder
 .spyproject/
@@ -75,9 +75,9 @@ target/
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
 
-# exclude data and models from source control by default
+# exclude data and outputs from source control by default
 /data/
-/models/
+# /outputs/
 
 # Mac OS-specific storage files
 .DS_Store

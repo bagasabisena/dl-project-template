@@ -1,4 +1,4 @@
-.PHONY: clean data lint requirements sync_data_to_bucket sync_data_from_bucket
+.PHONY: requirements clean lint upload_data download_data upload_outputs download_outputs environment jupyter
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -38,7 +38,7 @@ lint:
 	flake8 src
 
 ## Upload data to storage bucket (S3 or GCS)
-sync_data_to_bucket:
+upload_data:
 {%- if cookiecutter.object_storage == 's3' %}
 	aws s3 sync data/ s3://$(BUCKET)/data/
 {%- elif cookiecutter.object_storage == 'gcs' %}
@@ -46,11 +46,27 @@ sync_data_to_bucket:
 {%- endif %}
 
 ## Download data from storage bucket (S3 or GCS)
-sync_data_from_bucket:
+download_data:
 {%- if cookiecutter.object_storage == 's3' %}
 	aws s3 sync s3://$(BUCKET)/data/ data/
 {%- elif cookiecutter.object_storage == 'gcs' %}
 	gsutil -m gs://${BUCKET}/data/ data/
+{%- endif %}
+
+# Upload outputs to storage bucket (S3 or GCS)
+upload_outputs:
+{%- if cookiecutter.object_storage == 's3' %}
+	aws s3 sync outputs/ s3://$(BUCKET)/outputs/
+{%- elif cookiecutter.object_storage == 'gcs' %}
+	gsutil -m rsync outputs/ gs://${BUCKET}/outputs/
+{%- endif %}
+
+## Download outputs from storage bucket (S3 or GCS)
+download_outputs:
+{%- if cookiecutter.object_storage == 's3' %}
+	aws s3 sync s3://$(BUCKET)/outputs/ outputs/
+{%- elif cookiecutter.object_storage == 'gcs' %}
+	gsutil -m gs://${BUCKET}/outputs/ outputs/
 {%- endif %}
 
 ## Set up python interpreter environment

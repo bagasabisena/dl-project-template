@@ -1,0 +1,3 @@
+_target_: src.data.datamodule.MyDataModule
+batch_size: 32
+num_workers: 0

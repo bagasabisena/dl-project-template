@@ -1,0 +1,8 @@
+# @package _global_
+
+defaults:
+  - override /trainer: overfit
+  - override /callback: []  # use no callback
+
+datamodule:
+  batch_size: 5

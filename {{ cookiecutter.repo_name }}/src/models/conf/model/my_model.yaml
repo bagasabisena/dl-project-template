@@ -1,0 +1,4 @@
+_target_: src.models.net.MyModel
+input_dim: 512
+output_dim: 10
+learning_rate: 0.01

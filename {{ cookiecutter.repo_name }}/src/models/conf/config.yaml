@@ -1,0 +1,23 @@
+defaults:
+  - _self_
+  - datamodule: my_datamodule
+  - model: my_model
+  - trainer: fast_dev
+  - logger:
+    - tensorboard
+  - callback:
+    - early_stopping
+    - model_checkpoint
+
+# simple defaults are set here and are referred by defaults as _self_
+# for complex defaults that are composed of modules, we set those on above under defaults:
+name: "${dateid:}"
+version: 0
+tags:
+  - runs
+hydra:
+  run:
+    dir: outputs/singlerun/${name}
+  sweep:
+    dir: outputs/multirun/${name}
+    subdir: ${hydra.job.num}
