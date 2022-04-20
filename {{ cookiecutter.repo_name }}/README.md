@@ -57,5 +57,5 @@ python src/models/train_model.py +experiment=debug
 python src/models/train_model.py +experiment=overfit_single
 
 # this run a training job on a multiple training sample, to check if it can overfit
-python src/models/train_model.py +experiment=overfit_single
+python src/models/train_model.py +experiment=overfit_multi
 ```
