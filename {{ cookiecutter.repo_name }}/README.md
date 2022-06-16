@@ -45,6 +45,11 @@
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
+## Starting the project
+
+Run `make environment` to create a Conda environment, activate the environment,
+then install the necessary packages using `make requirements`.
+
 ## Start training jobs
 
 This project comes with several built-in Hydra experiments, tailored for debugging purpose
