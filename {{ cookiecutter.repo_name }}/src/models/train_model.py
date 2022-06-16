@@ -1,6 +1,4 @@
 import datetime
-from pathlib import Path
-import subprocess
 import sys
 
 from omegaconf import DictConfig, OmegaConf
@@ -39,11 +37,11 @@ def main(cfg: DictConfig) -> None:
     if "logger" in cfg:
         for k in cfg.logger:
             loggers.append(hydra.utils.instantiate(cfg['logger'][k]))
-    
+
     for logger in loggers:
         if isinstance(logger, NeptuneLogger):
             logger.experiment["params"] = cfg
-    
+
     # initiate callbacks
     callbacks = []
     if "callback" in cfg:
@@ -54,10 +52,12 @@ def main(cfg: DictConfig) -> None:
     trainer.fit(model, datamodule=datamodule)
 
     # run validate separately to run validation eval on the optimized model
-    trainer.validate(datamodule=datamodule)
+    if not trainer.fast_dev_run:
+        trainer.validate(model, datamodule=datamodule, ckpt_path="best")
 
     # uncomment if you want to run the test
     # trainer.test(model, datamodule=datamodule)
+
 
 if __name__ == "__main__":
     # uncomment this line if you use the Google AI Platform Training for training

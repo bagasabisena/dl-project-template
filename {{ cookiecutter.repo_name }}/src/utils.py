@@ -21,8 +21,8 @@ def get_data_folder_path() -> Tuple[Path, Path, Path, Path]:
     )
 
 
-def get_models_folder_path() -> Path:
-    return (Path(__file__).parents[1] / "models").resolve()
+def get_outputs_folder_path() -> Path:
+    return (Path(__file__).parents[1] / "outputs").resolve()
 
 
 def get_train_val_index_split(
