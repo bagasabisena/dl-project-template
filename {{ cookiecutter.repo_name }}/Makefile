@@ -23,7 +23,8 @@ endif
 ## Install Python Dependencies
 requirements:
 ifeq (True,$(HAS_CONDA))
-	conda env update --name $(PROJECT_NAME) -f env.yaml
+	pip install -U pip setuptools wheel
+	pip install -r requirements.txt
 else
 	@echo "Currently we only support conda-based project"
 endif
@@ -42,7 +43,7 @@ upload_data:
 {%- if cookiecutter.object_storage == 's3' %}
 	aws s3 sync data/ s3://$(BUCKET)/data/
 {%- elif cookiecutter.object_storage == 'gcs' %}
-	gsutil -m rsync data/ gs://${BUCKET}/data/
+	gsutil -m rsync -r data/ gs://${BUCKET}/data/
 {%- endif %}
 
 ## Download data from storage bucket (S3 or GCS)
@@ -50,7 +51,7 @@ download_data:
 {%- if cookiecutter.object_storage == 's3' %}
 	aws s3 sync s3://$(BUCKET)/data/ data/
 {%- elif cookiecutter.object_storage == 'gcs' %}
-	gsutil -m gs://${BUCKET}/data/ data/
+	gsutil -m rsync -r gs://${BUCKET}/data/ data/
 {%- endif %}
 
 # Upload outputs to storage bucket (S3 or GCS)
@@ -58,7 +59,7 @@ upload_outputs:
 {%- if cookiecutter.object_storage == 's3' %}
 	aws s3 sync outputs/ s3://$(BUCKET)/outputs/
 {%- elif cookiecutter.object_storage == 'gcs' %}
-	gsutil -m rsync outputs/ gs://${BUCKET}/outputs/
+	gsutil -m rsync -r outputs/ gs://${BUCKET}/outputs/
 {%- endif %}
 
 ## Download outputs from storage bucket (S3 or GCS)
@@ -66,7 +67,7 @@ download_outputs:
 {%- if cookiecutter.object_storage == 's3' %}
 	aws s3 sync s3://$(BUCKET)/outputs/ outputs/
 {%- elif cookiecutter.object_storage == 'gcs' %}
-	gsutil -m gs://${BUCKET}/outputs/ outputs/
+	gsutil -m rsync -r gs://${BUCKET}/outputs/ outputs/
 {%- endif %}
 
 ## Set up python interpreter environment
