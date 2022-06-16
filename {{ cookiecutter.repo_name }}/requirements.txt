@@ -1,0 +1,11 @@
+-e .
+flake8
+black
+jupyterlab
+tqdm
+ipywidgets
+hydra-core
+neptune-client
+torch
+pytorch-lightning
+torchmetrics
