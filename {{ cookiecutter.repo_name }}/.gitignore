@@ -76,7 +76,7 @@ target/
 .ipynb_checkpoints/
 
 # exclude data and outputs from source control by default
-/data/
+# /data/  do not ignore since this folder will be managed by dvc
 /outputs/
 
 # Mac OS-specific storage files

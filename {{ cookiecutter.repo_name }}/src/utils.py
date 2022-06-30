@@ -3,25 +3,30 @@ from pathlib import Path
 from typing import Tuple
 
 
-def get_data_folder_path() -> Tuple[Path, Path, Path, Path]:
+def get_project_root_path() -> Path:
+    """Return the absolute path to the project root.
+
+    Returns:
+        Path object to the project root
+    """
+    return (Path(__file__).parents[1]).resolve()
+
+
+def get_data_folder_path() -> Path:
     """Return the absolute path to the data subfolder.
 
     Returns:
-        Tuple[Path, Path, Path, Path]: The first element is the root data folder.
-        The second element is a dictionary with data subfolder as key
-        ('external', 'interim', 'processed', or 'raw'),
-        and the value is the corresponding path to the subfolder
+        Path object to the data subfolder
     """
-    data_path = (Path(__file__).parents[1] / "data").resolve()
-    return (
-        data_path / "external",
-        data_path / "interim",
-        data_path / "processed",
-        data_path / "raw"
-    )
+    return (Path(__file__).parents[1] / "data").resolve()
 
 
 def get_outputs_folder_path() -> Path:
+    """Return the absolute path to the output subfolder.
+
+    Returns:
+       Path object to the outputs subfolder
+    """
     return (Path(__file__).parents[1] / "outputs").resolve()
 
 
