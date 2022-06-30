@@ -12,6 +12,11 @@ DVC_REMOTE = """[core]
 def git_init():
     print('initialise git')
     subprocess.call(['git', 'init'])
+    subprocess.call(['git', 'branch', '-m', 'main'])
+
+
+def git_add():
+    print('making initial git commit')
     subprocess.call(['git', 'add', '*'])
     subprocess.call(['git', 'commit', '-m', 'Initial commit'])
 
@@ -28,14 +33,19 @@ def dvc_init():
 
 
 try:
+    git_init()
+except Exception:
+    print('Cannot initialise the project with git')
+    print('Please manually initialise the git with "git init"')
+
+try:
     dvc_init()
 except Exception:
     print('Cannot initialise the project with dvc')
     print('Please manually initialise the git with "dvc init"')
 
-
 try:
-    git_init()
+    git_add()
 except Exception:
-    print('Cannot initialise the project with git')
-    print('Please manually initialise the git with "git init"')
+    print('Cannot make initial commit')
+    print('Please manually commit with git')
